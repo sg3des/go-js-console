@@ -30,7 +30,14 @@ import (
 	"github.com/gopherjs/gopherjs/js"
 )
 
-var c = js.Global.Get("console")
+var c *js.Object
+
+//init check on exist js.Global
+func init() {
+	if js.Global != nil {
+		c = js.Global.Get("console")
+	}
+}
 
 // Assert writes msg to the console if b is false.
 func Assert(b bool, msg interface{}) {
